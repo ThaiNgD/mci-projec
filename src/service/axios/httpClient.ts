@@ -15,7 +15,6 @@ export const REFRESH_TOKEN =
   process.env.NEXT_PUBLIC_REFRESH_TOKEN || "MKTrefresh"; // Update Start: Thêm key refresh token
 export const BASE_URL =
   process.env.NEXT_PUBLIC_URL || "https://dev.thabicare.zenix.com.vn/";
-//https://content-ai-c4rx.onrender.com/ / http://localhost:5000/
 const axiosClient = Axios.create({
   baseURL: joinPathParent(BASE_URL, "/api/v1").slice(1),
   headers: {
@@ -51,7 +50,7 @@ axiosClient.interceptors.response.use(
     const originalRequest = error.config;
     const status = error?.response?.status;
     const message = error?.response?.data?.message ?? "";
-    const isPathLogout = originalRequest?.url?.startsWith("vi/logout");
+    const isPathLogout = originalRequest?.url?.startsWith("/logout");
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 

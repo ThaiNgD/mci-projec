@@ -15,6 +15,8 @@ export async function middleware(request: NextRequest) {
   // const isLogin = nextUrl.pathname.startsWith(`/${locale}/${Login}`);
   if (token) {
     return NextResponse.redirect(new URL(`/user-management`, nextUrl));
+  } else {
+    return NextResponse.redirect(new URL(`/login`, nextUrl));
   }
 }
 

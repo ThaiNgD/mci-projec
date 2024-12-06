@@ -4,6 +4,7 @@ import InputField from "@/components/CustomField/InputField";
 import { useAuthLogin } from "@/service/auth/useLogin";
 import { Button } from "flowbite-react";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
 import * as yup from "yup";
 
 const validateSchemaLogin = yup.object().shape({
@@ -12,6 +13,7 @@ const validateSchemaLogin = yup.object().shape({
 });
 
 function Login() {
+  const router = useRouter();
   const { mutate: login, isPending } = useAuthLogin();
   const formik = useFormik<IFormLogin>({
     initialValues: {
@@ -52,6 +54,9 @@ function Login() {
         <p
           role="button"
           className="text-sm font-bold hover:underline hover:text-blue-500"
+          onClick={(): void => {
+            router.push("/register");
+          }}
         >
           Đăng ký tài khoản
         </p>
