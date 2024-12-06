@@ -12,13 +12,14 @@ import {
   useMemo,
   useRef,
 } from "react";
-import Select, {
+import {
   components,
   ControlProps,
   CSSObjectWithLabel,
   Props,
   StylesConfig,
 } from "react-select";
+import CreatableSelect from "react-select/creatable";
 import CheckBoxField from "./CheckboxField";
 import ErrorHelperText from "./ErrorHelperText";
 import WrapperLabelForm, { WrapperLabelFormProps } from "./WrapperLabelForm";
@@ -31,11 +32,14 @@ export interface CustomSelectProps<T>
   title?: string;
   clsTitle?: string;
   name: string;
+  createOption?: any;
   formik?: FormikProps<T>;
   clsChildren?: string;
   msgError?: string;
   changeSelected?: (
-    selected?: Record<string, string> | Array<Record<string, string>>
+    selected?:
+      | Record<string, string | [number, number] | number>
+      | Array<Record<string, string | [number, number] | number>>
   ) => void;
   setValueSearch?: Dispatch<SetStateAction<string>>;
 }
@@ -73,6 +77,7 @@ export const SelectField = <T,>({
   changeSelected,
   value,
   setValueSearch,
+  createOption,
   clsLabelWrapper,
   ...spread
 }: CustomSelectProps<T>): JSX.Element => {
@@ -223,13 +228,14 @@ export const SelectField = <T,>({
           <span className="text-sm font-bold italic">{title}</span>
         </div>
       )}
-      <Select
+      <CreatableSelect
         blurInputOnSelect={true}
         isSearchable={false}
         className={cn("shadow-sm", className)}
         name={name}
         value={newValue}
         onChange={onChange as any}
+        onCreateOption={createOption}
         placeholder={placeholder}
         options={options}
         isMulti={isMulti}
@@ -239,6 +245,7 @@ export const SelectField = <T,>({
         onBlur={formik ? formik?.handleBlur : spread?.onBlur}
         components={CustomComponents}
         {...spread}
+        isDisabled={false}
       />
 
       <ErrorHelperText

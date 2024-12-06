@@ -1,6 +1,7 @@
 "use client";
 import InputField from "@/components/CustomField/InputField";
 import ModalAddAccount from "@/components/Modal/ModalAddAccount";
+import TableSettingSystem from "@/components/Table/TableUserInfo";
 import { useState } from "react";
 import { CiFilter } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
@@ -12,7 +13,7 @@ const Page = () => {
         <div className="flex flex-col gap-[10px]">
           <div className="flex gap-2">
             <FaRegUserCircle size={30} className="text-[#845B04]" />
-            <text className="text-[28px] font-semibold">Quản lý tài khoản</text>
+            <p className="text-[28px] font-semibold">Quản lý tài khoản</p>
           </div>
           <div className="flex gap-[30px]">
             <InputField
@@ -45,6 +46,10 @@ const Page = () => {
           </button>
         </div>
       </div>
+      <div className="mt-[20px]">
+        <TableSettingSystem />
+      </div>
+
       <ModalAddAccount
         isShow={isShowModalAddAccount}
         setIsShow={setIsShowModalAddAccount}
