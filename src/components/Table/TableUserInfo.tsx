@@ -10,6 +10,7 @@ const TableSettingSystem = (): JSX.Element => {
       <div className="bg-white custom-shadow rounded-[20px] ">
         <MantineTableCustom
           column={configTableManagerAccount}
+          //eslint-disable-next-line @typescript-eslint/no-explicit-any
           data={data as any}
           idAccessor={""}
         />
